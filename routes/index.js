@@ -1,8 +1,7 @@
 
 var express = require('express');
 var router = express.Router();
-
-const message= [
+const messages= [
   {
     text: "Hi there!",
     user: "Amanda",
@@ -14,9 +13,16 @@ const message= [
     added: new Date()
   }
 ];
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function(req, res) {
+  console.log(req.body)
+  res.render('index', { title: 'User Messages',messages });
+
 });
+
+
+
+
 
 module.exports = router;

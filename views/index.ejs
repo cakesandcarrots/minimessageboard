@@ -6,6 +6,12 @@
   </head>
   <body>
     <h1><%= title %></h1>
+    <% console.log(messages)%>
+    <% messages.forEach(element => { %>
+      <h3><%= element.user%></h3>
+      <p><%= element.text%></p>
+      <p><%= element.date%></p>
+    <% }) %>
     <p>Welcome to <%= title %></p>
   </body>
 </html>

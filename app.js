@@ -6,9 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var formRouter = require('./routes/form');
 
 var app = express();
-
+app.use(express.urlencoded({extended: true}))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -21,6 +22,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/new',formRouter);
+
+
+
+
+app.post('/new',(req,res)=>{
+  const messages= [
+    {
+      text: "Hi there!",
+      user: "Amanda",
+      added: new Date()
+    },
+    {
+      text: "Hello World! ",
+      user: "Charles",
+      added: new Date()
+    }
+  ];
+messages.push({text:req.body.text,user: req.body.user,added:new Date()});  
+res.render('index', { title: 'User Messages',messages });
+})
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
